@@ -18,7 +18,7 @@ scalazVersion in ThisBuild := "7.1.13"
 // Root project
 name := "root"
 description := "A minimal, Scala-idiomatic library for HTTP"
-noPublishSettings
+publishSettings
 
 lazy val core = libraryProject("core")
   .enablePlugins(BuildInfoPlugin)
@@ -212,7 +212,7 @@ lazy val twirl = http4sProject("twirl")
 
 lazy val bench = http4sProject("bench")
   .enablePlugins(JmhPlugin)
-  .settings(noPublishSettings)
+  .settings(publishSettings)
   .settings(noCoverageSettings)
   .settings(
   description := "Benchmarks for http4s"
@@ -220,7 +220,7 @@ lazy val bench = http4sProject("bench")
   .dependsOn(core)
 
 lazy val loadTest = http4sProject("load-test")
-  .settings(noPublishSettings)
+  .settings(publishSettings)
   .settings(noCoverageSettings)
   .settings(
   description := "Load tests for http4s servers",
@@ -239,7 +239,7 @@ val siteStageDirectory    = SettingKey[File]("site-stage-directory")
 val copySiteToStage       = TaskKey[Unit]("copy-site-to-stage")
 val exportMetadataForSite = TaskKey[File]("export-metadata-for-site", "Export build metadata, like http4s and key dependency versions, for use in tuts and when building site")
 lazy val docs = http4sProject("docs")
-  .settings(noPublishSettings)
+  .settings(publishSettings)
   .settings(noCoverageSettings)
   .settings(unidocSettings)
   .settings(ghpages.settings)
@@ -371,7 +371,7 @@ lazy val docs = http4sProject("docs")
 
 
 lazy val examples = http4sProject("examples")
-  .settings(noPublishSettings)
+  .settings(publishSettings)
   .settings(noCoverageSettings)
   .settings(
   description := "Common code for http4s examples",
@@ -446,7 +446,7 @@ def libraryProject(name: String) = http4sProject(name)
 
 def exampleProject(name: String) = http4sProject(name)
   .in(file(name.replace("examples-", "examples/")))
-  .settings(noPublishSettings)
+  .settings(publishSettings)
   .settings(noCoverageSettings)
   .dependsOn(examples)
 
@@ -584,7 +584,12 @@ lazy val commonSettings = Seq(
 ) ++ xlint
 
 lazy val publishSettings = Seq(
-  credentials ++= sonatypeEnvCredentials
+  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
+  publishTo   := Some(
+    "simplemachines nexus" at "https://nexus.simplemachines.com.au/content/repositories/" + {
+      if (version.value.trim.endsWith("SNAPSHOT")) "snapshots/" else "releases/"
+    }
+  )
 )
 
 lazy val noPublishSettings = Seq(

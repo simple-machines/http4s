@@ -78,7 +78,7 @@ object Http4sBuild {
   lazy val asyncHttpClient     = "org.asynchttpclient"       % "async-http-client"       % "2.0.32"
   lazy val blaze               = "org.http4s"               %% "blaze-http"              % "0.12.6"
   lazy val circeGeneric        = "io.circe"                 %% "circe-generic"           % circeJawn.revision
-  lazy val circeJawn           = "io.circe"                 %% "circe-jawn"              % "0.6.1"
+  lazy val circeJawn           = "io.circe"                 %% "circe-jawn"              % "0.8.0"
   lazy val circeLiteral        = "io.circe"                 %% "circe-literal"           % circeJawn.revision
   lazy val cryptobits          = "org.reactormonk"          %% "cryptobits"              % "1.1"
   lazy val discipline          = "org.typelevel"            %% "discipline"              % "0.7.3"

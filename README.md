@@ -1,3 +1,10 @@
+This is a fork of http4s that updates the version of circe to `0.8.0`. To build
+and publish locally:
+
+```
+sbt '; set scalaVersion in ThisBuild := "2.12.2"; set scalazVersion in ThisBuild := "7.2.12"; set version in ThisBuild := "0.15.16a_circe0.8.0"; publish'
+```
+
 # Http4s [![Build Status](https://travis-ci.org/http4s/http4s.svg?branch=master)](https://travis-ci.org/http4s/http4s) [![Gitter chat](https://badges.gitter.im/http4s/http4s.png)](https://gitter.im/http4s/http4s) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.http4s/http4s-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.http4s/http4s-core_2.11)
 
 Http4s is a minimal, idiomatic Scala interface for HTTP services.  Http4s is
